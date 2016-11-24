@@ -27,7 +27,7 @@
                         <ul class="treeview-menu">
                             {% for sub_menu in menu.sub_menus %}
                                 <li class="{% if sub_menu == ROOT_MENU.current_menu %}active{% endif %}">
-                                    <a href="{% url sub_menu.view_name %}">
+                                    <a href="{% if sub_menu.view_name %}{% url sub_menu.view_name %}{% endif %}">
                                         <i class="fa {{ sub_menu.icon_classes }}"></i> {{ sub_menu.name }}
                                     </a>
                                 </li>

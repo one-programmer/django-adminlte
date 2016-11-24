@@ -1,4 +1,4 @@
-{% if pager %}
+{% if pager and ROOT_MENU.current_menu.view_name %}
     <ul class="pagination pagination-sm no-margin pull-right">
         <li><a href="{% url ROOT_MENU.current_menu.view_name %}?page=1&{{ pager.url_params }}">&laquo;</a></li>
         {% if pager.page > 2 %}

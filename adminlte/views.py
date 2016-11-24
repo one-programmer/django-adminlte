@@ -168,7 +168,7 @@ class ExamplePagesCreateView(OdminBaseView):
         if form.is_valid():
             Page.objects.create(title=form.cleaned_data['title'], content=form.cleaned_data['content'])
             messages.add_message(request, messages.SUCCESS, '增加成功')
-            return redirect('adminlte.pages')
+            return redirect('adminlte.example.pages')
 
         messages.add_message(request, messages.ERROR, '参数错误')
         return render(request, self.template_name)
@@ -193,7 +193,7 @@ class ExamplePageEditView(OdminBaseView):
             page.content = form.cleaned_data['content']
             page.save()
             messages.add_message(request, messages.SUCCESS, '修改成功')
-            return redirect('adminlte.pages')
+            return redirect('adminlte.example.pages')
 
         messages.add_message(request, messages.ERROR, '参数错误')
         return render(request, self.template_name)
