@@ -122,7 +122,7 @@ class OdminBaseView(View):
             url(r'^logout$', logout, name='adminlte.logout'),
             url(r'^pages/(?P<page_id>[0-9]+)/$', pages, name='adminlte.example.pages'),
         ]
-
+        print('urlpatterns:', urlpatterns)
         return urlpatterns
 
 
