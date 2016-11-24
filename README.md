@@ -1,5 +1,11 @@
 # Django AdminLTE
 
+## Install
+
+```
+pip install django-adminlte-admin
+```
+
 ## Quick start
 
 1. Add "adminlte" to your INSTALLED_APPS setting like this::
