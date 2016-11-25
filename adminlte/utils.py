@@ -76,7 +76,8 @@ class AdminLTEBaseView(View):
                 if parent_menu not in last_menus:
                     last_menus.append(parent_menu)
 
-        return last_menus.sort(key=lambda menu: menu.sort, reverse=True)
+        last_menus.sort(key=lambda menu: menu.sort, reverse=True)
+        return last_menus
 
     @classmethod
     def _regex_name(cls):
