@@ -14,7 +14,7 @@ from functools import wraps
 
 class AdminMenu(object):
 
-    def __init__(self, name, icon_classes='fa-circle-o', description=None, parent_menu=None):
+    def __init__(self, name, icon_classes='fa-circle-o', description=None, parent_menu=None, sort=0):
         self.description = description
         self.icon_classes = icon_classes
         self.view_name = None
@@ -23,6 +23,7 @@ class AdminMenu(object):
         self.extra_view_names = []
         self.parent_menu = parent_menu
         self.sub_menus = []
+        self.sort = sort
 
     def active(self, view_name):
 
@@ -75,7 +76,7 @@ class AdminLTEBaseView(View):
                 if parent_menu not in last_menus:
                     last_menus.append(parent_menu)
 
-        return last_menus
+        return last_menus.sort(key=lambda menu: menu.sort, reverse=True)
 
     @classmethod
     def _regex_name(cls):
