@@ -13,7 +13,7 @@ page_manager = AdminMenu("富文本管理", icon_classes='fa-safari')
 class IndexView(AdminLTEBaseView):
     template_name = 'adminlte/index.html'
 
-    menu = AdminMenu(name="Dashboard", description='控制面板页面', icon_classes='fa-dashboard')
+    menu = AdminMenu(name="Dashboard", description='控制面板页面', icon_classes='fa-dashboard', sort=99999)
 
 
 class ExampleView(AdminLTEBaseView):
