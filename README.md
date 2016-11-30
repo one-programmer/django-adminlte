@@ -10,7 +10,7 @@ pip install django-adminlte-admin
 
 1. Add "adminlte" to your INSTALLED_APPS setting like this::
 
-```
+```python
 INSTALLED_APPS = [
     ...
     'adminlte',
@@ -19,7 +19,9 @@ INSTALLED_APPS = [
 
 2. Include the adminlte URLconf in your project urls.py like this::
 
-    url(r'^adminlte/', include('adminlte.urls')),
+```python
+url(r'^adminlte/', include('adminlte.urls')),
+```
 
 3. Run `python manage.py migrate` to create the adminlte models.
 
@@ -31,7 +33,7 @@ INSTALLED_APPS = [
 
 ## Develop
 
-```
+```shell
 rm dist/*
 python setup.py sdist bdist_wheel
 twine upload dist/*
