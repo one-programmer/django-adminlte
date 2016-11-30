@@ -13,7 +13,7 @@ pip install django-adminlte-admin
 ```python
 INSTALLED_APPS = [
     ...
-    'adminlte',
+    'adminlte.apps.AdminlteConfig',
 ]
 ```
 

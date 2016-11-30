@@ -1,5 +1,8 @@
 from django.apps import AppConfig
 
 
-class OdminConfig(AppConfig):
+class AdminlteConfig(AppConfig):
     name = 'adminlte'
+
+    def ready(self):
+        self.module.autodiscover()
