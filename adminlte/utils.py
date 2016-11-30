@@ -73,6 +73,7 @@ class AdminLTEBaseView(View):
                 parent_menu = menu.parent_menu
                 if menu not in parent_menu.sub_menus:
                     parent_menu.sub_menus.append(menu)
+                    parent_menu.sub_menus.sort(key=lambda sub_menu: sub_menu.sort, reverse=True)
                 if parent_menu not in last_menus:
                     last_menus.append(parent_menu)
 
