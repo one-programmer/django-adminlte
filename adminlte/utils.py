@@ -36,8 +36,6 @@ class AdminMenu(object):
 class AdminLTEBaseView(View):
     template_name = 'adminlte/index.html'
 
-    # menu = AdminMenu(name="Dashboard", description='控制面板页面', icon_classes='fa-dashboard')
-
     def dispatch(self, request, *args, **kwargs):
         # Try to dispatch to the right method; if a method doesn't exist,
         # defer to the error handler. Also defer to the error handler if the
@@ -196,7 +194,7 @@ class Pager(object):
 def admin_config(request):
 
     if isinstance(request.user, AnonymousUser):
-        name = '游客'
+        name = 'Guest'
         date_joined = None
     else:
         name = "{first_name} {last_name}".format(first_name=request.user.first_name, last_name=request.user.last_name)

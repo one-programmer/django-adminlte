@@ -7,7 +7,7 @@ from .utils import AdminLTEBaseView, AdminMenu
 class IndexView(AdminLTEBaseView):
     template_name = 'adminlte/index.html'
 
-    menu = AdminMenu(name="Dashboard", description='控制面板页面', icon_classes='fa-dashboard', sort=99999)
+    menu = AdminMenu(name="Dashboard", description='Empty Dashboard page', icon_classes='fa-dashboard', sort=99999)
 
 
 def login(request):
@@ -18,7 +18,7 @@ def login(request):
         password = request.POST.get('password')
         user = authenticate(username=username, password=password, type=1)
         if not user or not user.is_staff:
-            message = '用户名或密码错误'
+            message = 'user name or password error'
             return render(request, 'adminlte/login.html', context={
                 "message": message
             })
