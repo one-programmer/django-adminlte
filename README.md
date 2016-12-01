@@ -2,6 +2,8 @@
 
 Django AdminLTE is a smart admin based on adminLTE and django
 
+[![Build Status](https://travis-ci.org/beastbikes/django-adminlte.svg?branch=master)](https://travis-ci.org/beastbikes/django-adminlte)
+
 ## Install
 
 ```shell
