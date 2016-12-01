@@ -6,5 +6,10 @@ python:
   - "3.5-dev" # 3.5 development branch
   - "3.6-dev" # 3.6 development branch
   - "nightly" # currently points to 3.7-dev
-install: "pip install -r requirements.txt"
+install:
+ - pip install -q Django==$DJANGO_VERSION
 script: python runtests.py
+env:
+ - DJANGO_VERSION=1.8
+ - DJANGO_VERSION=1.9
+ - DJANGO_VERSION=1.10
