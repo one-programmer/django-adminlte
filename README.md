@@ -4,7 +4,7 @@ Django AdminLTE is a smart admin based on adminLTE and django
 
 ## Install
 
-```
+```shell
 pip install django-adminlte-admin
 ```
 
