@@ -200,8 +200,9 @@ def admin_config(request):
         name = "{first_name} {last_name}".format(first_name=request.user.first_name, last_name=request.user.last_name)
         date_joined = request.user.date_joined
 
+    view_name = request.resolver_match.view_name if request.resolver_match else None
     return {
-        "ROOT_MENU": RootMenu(current_view_name=request.resolver_match.view_name, init_menus=AdminLTEBaseView.menus()),
+        "ROOT_MENU": RootMenu(current_view_name=view_name, init_menus=AdminLTEBaseView.menus()),
         "current_user": {
             "nickname": name,
             "avatar_url": "/static/adminLTE/img/avatar5.png",
