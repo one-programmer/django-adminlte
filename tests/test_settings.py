@@ -37,3 +37,7 @@ TEMPLATES = [
         },
     },
 ]
+
+STATIC_URL = '/static/'
+
+# STATIC_ROOT =
