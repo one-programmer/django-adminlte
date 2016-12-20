@@ -6,7 +6,7 @@ from django.test import RequestFactory
 from django.test import TestCase
 
 from adminlte.utils import AdminMenu
-from adminlte.views import IndexView
+from adminlte.adminlte import IndexView
 
 
 class MenuTest(TestCase):
