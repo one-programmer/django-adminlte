@@ -1,5 +1,6 @@
 import logging
 
+from django.conf import settings
 from django.contrib.auth.models import AnonymousUser, User
 from django.test import RequestFactory
 from django.test import TestCase
@@ -47,6 +48,21 @@ class ViewTest(TestCase):
         self.assertEqual(response.status_code, 302, msg='anonymous user will redirect to login page')
 
         request.user = self.user
+
+        response = IndexView.as_view()(request)
+        self.assertEqual(response.status_code, 200)
+
+    def test_setting_login_method(self):
+        """
+        test change is login validate method
+        """
+
+        def is_login(request):
+            return isinstance(request.user, AnonymousUser)
+        settings.ADMINLTE_IS_LOGIN_FUNC = is_login
+        request = self.factory.get('/adminlte/index')
+
+        request.user = AnonymousUser()
 
         response = IndexView.as_view()(request)
         self.assertEqual(response.status_code, 200)

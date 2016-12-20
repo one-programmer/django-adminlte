@@ -9,7 +9,7 @@ page_manager = AdminMenu("富文本管理", icon_classes='fa-safari')
 
 
 class ExampleView(AdminLTEBaseView):
-    template_name = 'adminlte/example.html'
+    template_name = 'example.html'
 
     menu = AdminMenu(name="样例", description='这是一个测试页面', icon_classes='fa-code')
 
@@ -21,7 +21,7 @@ class ExampleView(AdminLTEBaseView):
 
 
 class ExamplePagesView(AdminLTEBaseView):
-    template_name = 'adminlte/pages/index.html'
+    template_name = 'pages/index.html'
 
     menu = AdminMenu(name="富文本列表", parent_menu=page_manager)
 
@@ -35,7 +35,7 @@ class ExamplePagesView(AdminLTEBaseView):
 
 
 class ExamplePagesCreateView(AdminLTEBaseView):
-    template_name = 'adminlte/pages/edit.html'
+    template_name = 'pages/edit.html'
 
     menu = AdminMenu(name="新页面", parent_menu=page_manager)
 
@@ -51,7 +51,7 @@ class ExamplePagesCreateView(AdminLTEBaseView):
 
 
 class ExamplePageEditView(AdminLTEBaseView):
-    template_name = 'adminlte/pages/edit.html'
+    template_name = 'pages/edit.html'
 
     _regex_name = 'pages/(?P<page_id>[0-9]+)/edit'
 
@@ -75,8 +75,12 @@ class ExamplePageEditView(AdminLTEBaseView):
         return render(request, self.template_name)
 
 
-def pages(request, page_id):
-    page = Page.objects.get(pk=page_id)
-    return render_to_response('adminlte/page.html', context={
-        "page": page
-    })
+class PagesView(AdminLTEBaseView):
+
+    _regex_name = 'pages/(?P<page_id>[0-9]+)'
+
+    def get(self, request, page_id, *args, **kwargs):
+        page = Page.objects.get(pk=page_id)
+        return render_to_response('page.html', context={
+            "page": page
+        })

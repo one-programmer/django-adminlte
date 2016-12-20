@@ -1,5 +1,6 @@
 import math
 
+from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 
 try:
@@ -36,14 +37,22 @@ class AdminMenu(object):
 class AdminLTEBaseView(View):
     template_name = 'adminlte/index.html'
 
+    login_required = True
+
+    @staticmethod
+    def _default_is_login_func(request):
+        return not isinstance(request.user, AnonymousUser) and request.user.is_staff
+
     def dispatch(self, request, *args, **kwargs):
         # Try to dispatch to the right method; if a method doesn't exist,
         # defer to the error handler. Also defer to the error handler if the
         # request method isn't on the approved list.
 
         if getattr(self, 'login_required', True):
-            if not request.user.id or not request.user.is_staff:
-                return redirect('adminlte.login')
+            is_login = getattr(settings, 'ADMINLTE_IS_LOGIN_FUNC', self._default_is_login_func)
+            login_view = getattr(settings, 'ADMINLTE_LOGIN_VIEW', 'adminlte.login')
+            if not is_login(request):
+                return redirect(login_view)
 
         if request.method.lower() in self.http_method_names:
             handler = getattr(self, request.method.lower(), self.http_method_not_allowed)

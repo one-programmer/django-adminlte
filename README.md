@@ -35,6 +35,17 @@ url(r'^adminlte/', include('adminlte.urls')),
 5 Look the examples in the code to see how to start.
 
 
+## Settings
+
+### ADMINLTE_LOGIN_VIEW
+
+adminlte login view. default is `adminlte.login`
+
+### ADMINLTE_IS_LOGIN_FUNC
+
+adminlte login validate method. if `required_login=False` will not validate login
+
+
 ## Develop
 
 ```shell

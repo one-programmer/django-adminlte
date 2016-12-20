@@ -14,12 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-from django.contrib import admin
-
-from page import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
     url(r'^adminlte/', include('adminlte.urls')),
-    url(r'^pages/(?P<page_id>[0-9]+)/$', views.pages, name='adminlte.example.pages'),
 ]
