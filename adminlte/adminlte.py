@@ -6,7 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render, redirect
 from django.db.models import Q
 
-from adminlte.forms import PermissionForm
+from .forms import PermissionForm
 from .utils import AdminLTEBaseView, AdminMenu, Pager
 
 
