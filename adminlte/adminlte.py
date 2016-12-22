@@ -1,8 +1,10 @@
 from django.conf import settings
+from django.contrib.auth.models import Permission, Group
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.shortcuts import render, redirect
+from django.db.models import Q
 
-from .utils import AdminLTEBaseView, AdminMenu
+from .utils import AdminLTEBaseView, AdminMenu, Pager
 
 
 class IndexView(AdminLTEBaseView):
@@ -36,3 +38,26 @@ class LoginView(AdminLTEBaseView):
             })
         django_login(request, user)
         return redirect('adminlte.index')
+
+
+permission_group_menu = AdminMenu(name="权限与群组", icon_classes='fa-lock')
+
+
+class PermissionsView(AdminLTEBaseView):
+
+    menu = AdminMenu('权限列表', parent_menu=permission_group_menu)
+
+    def get(self, request, *args, **kwargs):
+        search = request.GET.get('search', '')
+
+        query = Permission.objects.all()
+
+        if search:
+            query = query.filter(
+                Q(name__contains=search) | Q(codename__contains=search))
+
+        pager = Pager.from_request(query, request)
+        return render(request, 'adminlte/permissions/index.html', context={
+            "pager": pager,
+            "search": search
+        })
