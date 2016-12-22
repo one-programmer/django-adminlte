@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.models import Permission, Group
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.shortcuts import render, redirect
@@ -40,12 +41,12 @@ class LoginView(AdminLTEBaseView):
         return redirect('adminlte.index')
 
 
-permission_group_menu = AdminMenu(name="权限与群组", icon_classes='fa-lock')
+permission_group_menu = AdminMenu(name="Permissions", icon_classes='fa-lock')
 
 
 class PermissionsView(AdminLTEBaseView):
 
-    menu = AdminMenu('权限列表', parent_menu=permission_group_menu)
+    menu = AdminMenu('Permissions', parent_menu=permission_group_menu)
 
     def get(self, request, *args, **kwargs):
         search = request.GET.get('search', '')
@@ -61,3 +62,14 @@ class PermissionsView(AdminLTEBaseView):
             "pager": pager,
             "search": search
         })
+
+
+class PermissionDeleteView(AdminLTEBaseView):
+
+    _regex_name = 'permissions/(?P<pk>[0-9]+)/delete'
+
+    def get(self, request, pk, *args, **kwargs):
+        permission = Permission.objects.get(pk=pk)
+        permission.delete()
+        messages.add_message(request, messages.SUCCESS, '删除成功')
+        return redirect('adminlte.permissions')

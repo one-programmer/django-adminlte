@@ -21,14 +21,17 @@
                 <tr>
                     <th>#</th>
                     <th>CODE</th>
-                    <th>名称</th>
+                    <th>name</th>
+                    <th>-</th>
                 </tr>
                 {% for permission in pager.items %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
                         <td>{{ permission.codename }}</td>
                         <td>{{ permission.name }}</td>
-                        <td></td>
+                        <td>
+                            <a href="{% url 'adminlte.permission.delete' pk=permission.id %}">Delete</a>
+                        </td>
                     </tr>
                 {% endfor %}
             </table>
