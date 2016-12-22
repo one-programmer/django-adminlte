@@ -8,18 +8,16 @@
             <table class="table table-bordered">
                 <tr>
                     <th>#</th>
-                    <th>name</th>
-                    <th>-</th>
+                    <th>username</th>
+                    <th>email</th>
                 </tr>
-                {% for group in pager.items %}
-                    <tr data-id="{{ group.id }}">
+                {% for item in pager.items %}
+                    <tr data-id="{{ item.id }}">
                         <td>
-                            <a href="{% url 'adminlte.group.edit' pk=group.id %}">{{ forloop.counter }}</a>
+                            <a href="{% url 'adminlte.user.group.edit' pk=item.id %}">{{ forloop.counter }}</a>
                         </td>
-                        <td>{{ group.name }}</td>
-                        <td>
-                            <a href="{% url 'adminlte.group.delete' pk=group.id %}">Delete</a>
-                        </td>
+                        <td>{{ item.username }}</td>
+                        <td>{{ item.email }}</td>
                     </tr>
                 {% endfor %}
             </table>

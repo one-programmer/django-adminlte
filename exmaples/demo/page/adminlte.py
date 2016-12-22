@@ -53,7 +53,7 @@ class ExamplePagesCreateView(AdminLTEBaseView):
 class ExamplePageEditView(AdminLTEBaseView):
     template_name = 'pages/edit.html'
 
-    _regex_name = 'pages/(?P<page_id>[0-9]+)/edit'
+    _regex_name = '^pages/(?P<page_id>[0-9]+)/edit$'
 
     def get(self, request, page_id, *args, **kwargs):
         page = Page.objects.get(pk=page_id)
@@ -77,7 +77,7 @@ class ExamplePageEditView(AdminLTEBaseView):
 
 class PagesView(AdminLTEBaseView):
 
-    _regex_name = 'pages/(?P<page_id>[0-9]+)'
+    _regex_name = '^pages/(?P<page_id>[0-9]+)$'
 
     def get(self, request, page_id, *args, **kwargs):
         page = Page.objects.get(pk=page_id)

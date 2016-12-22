@@ -11,7 +11,6 @@ except ImportError:
 from django.views.generic import View
 from django.shortcuts import redirect, render
 from django.http import HttpResponseForbidden
-from functools import wraps
 
 
 class AdminMenu(object):
@@ -229,13 +228,3 @@ def admin_config(request):
             "date_joined": date_joined,
         },
     }
-
-
-def admin_only(api_func):
-    @wraps(api_func)
-    def _warp(request, *args, **kwargs):
-        if not request.user.id or not request.user.is_staff:
-            return redirect('adminlte.login')
-
-        return api_func(request, *args, **kwargs)
-    return _warp

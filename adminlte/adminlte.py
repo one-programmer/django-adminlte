@@ -1,12 +1,12 @@
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth.models import Permission, Group
+from django.contrib.auth.models import Permission, Group, User
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render, redirect
 from django.db.models import Q
 
-from .forms import PermissionForm, GroupForm
+from .forms import PermissionForm, GroupForm, UserGroupForm
 from .utils import AdminLTEBaseView, AdminMenu, Pager
 
 
@@ -88,7 +88,7 @@ class PermissionsCreateView(AdminLTEBaseView):
 
 class PermissionDeleteView(AdminLTEBaseView):
 
-    _regex_name = 'permissions/(?P<pk>[0-9]+)/delete'
+    _regex_name = '^permissions/(?P<pk>[0-9]+)/delete$'
 
     def get(self, request, pk, *args, **kwargs):
         permission = Permission.objects.get(pk=pk)
@@ -98,7 +98,7 @@ class PermissionDeleteView(AdminLTEBaseView):
 
 
 class PermissionEditView(AdminLTEBaseView):
-    _regex_name = 'permissions/(?P<pk>[0-9]+)/edit'
+    _regex_name = '^permissions/(?P<pk>[0-9]+)/edit$'
 
     template_name = 'adminlte/permissions/edit.html'
 
@@ -162,7 +162,7 @@ class GroupCreateView(AdminLTEBaseView):
 
 class GroupDeleteView(AdminLTEBaseView):
 
-    _regex_name = 'groups/(?P<pk>[0-9]+)/delete'
+    _regex_name = '^groups/(?P<pk>[0-9]+)/delete$'
 
     def get(self, request, pk, *args, **kwargs):
         group = Group.objects.get(pk=pk)
@@ -172,7 +172,7 @@ class GroupDeleteView(AdminLTEBaseView):
 
 
 class GroupEditView(AdminLTEBaseView):
-    _regex_name = 'groups/(?P<pk>[0-9]+)/edit'
+    _regex_name = '^groups/(?P<pk>[0-9]+)/edit$'
 
     template_name = 'adminlte/groups/edit.html'
 
@@ -206,3 +206,60 @@ class GroupEditView(AdminLTEBaseView):
 
         messages.add_message(request, messages.ERROR, 'params error')
         return render(request, self.template_name)
+
+
+class UserGroupsView(AdminLTEBaseView):
+
+    menu = AdminMenu('User groups', parent_menu=permission_group_menu)
+
+    def get(self, request, *args, **kwargs):
+        search = request.GET.get('search', '')
+
+        query = User.objects.all()
+
+        if search:
+            query = query.filter(
+                Q(username__contains=search) | Q(email__contains=search))
+
+        pager = Pager.from_request(query, request)
+        return render(request, 'adminlte/user_groups/index.html', context={
+            "pager": pager,
+            "search": search
+        })
+
+
+class UserGroupEditView(AdminLTEBaseView):
+    _regex_name = '^user_groups/(?P<pk>[0-9]+)/edit$'
+
+    template_name = 'adminlte/user_groups/edit.html'
+
+    def get(self, request, pk, *args, **kwargs):
+        user = User.objects.get(pk=pk)
+        user_groups = user.groups.all()
+        groups = Group.objects.all()
+        return render(request, self.template_name, context={
+            "user": user,
+            "user_groups": user_groups,
+            "groups": groups,
+        })
+
+    def post(self, request, pk, *args, **kwargs):
+        form = UserGroupForm(request.POST)
+
+        user = User.objects.get(pk=pk)
+
+        if form.is_valid():
+            groups = form.cleaned_data['groups']
+            delete_groups = set(user.groups.all()) - set(groups)
+            add_groups = set(groups) - set(user.groups.all())
+            for group in delete_groups:
+                user.groups.remove(group)
+
+            for group in add_groups:
+                user.groups.add(group)
+            user.save()
+            messages.add_message(request, messages.SUCCESS, 'edit success')
+            return redirect('adminlte.user.group.edit', pk=user.id)
+
+        messages.add_message(request, messages.ERROR, 'params error')
+        return redirect('adminlte.user.group.edit', pk=user.id)
