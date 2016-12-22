@@ -79,10 +79,10 @@ class PermissionsCreateView(AdminLTEBaseView):
             Permission.objects.create(codename=form.cleaned_data['codename'],
                                       name=form.cleaned_data['name'],
                                       content_type=ContentType.objects.get(model='permission'))
-            messages.add_message(request, messages.SUCCESS, '增加成功')
+            messages.add_message(request, messages.SUCCESS, 'add success')
             return redirect('adminlte.permissions')
 
-        messages.add_message(request, messages.ERROR, '参数错误')
+        messages.add_message(request, messages.ERROR, 'params error')
         return render(request, self.template_name)
 
 
@@ -116,8 +116,8 @@ class PermissionEditView(AdminLTEBaseView):
             permission.codename = form.cleaned_data['codename']
             permission.name = form.cleaned_data['name']
             permission.save()
-            messages.add_message(request, messages.SUCCESS, '修改成功')
+            messages.add_message(request, messages.SUCCESS, 'edit success')
             return redirect('adminlte.permissions')
 
-        messages.add_message(request, messages.ERROR, '参数错误')
+        messages.add_message(request, messages.ERROR, 'params error')
         return render(request, self.template_name)
