@@ -72,14 +72,19 @@ class AdminLTEBaseView(View):
         return render(request, self.template_name)
 
     @classmethod
-    def menus(cls):
+    def menus(cls, user):
         menus = []
         for clzss in cls.__subclasses__():
-            if hasattr(clzss, 'menu'):
-                menu = clzss.menu
-                if menu:
-                    menu.view_name = clzss._view_name()
-                    menus.append(menu)
+
+            menu = clzss.menu
+            if menu:
+                permission = clzss.permission
+                if permission:
+                    if not user.is_superuser and not user.has_perm(clzss.permission):
+                        continue
+
+                menu.view_name = clzss._view_name()
+                menus.append(menu)
 
         last_menus = []
         for menu in menus:
@@ -220,7 +225,7 @@ def admin_config(request):
 
     view_name = request.resolver_match.view_name if request.resolver_match else None
     return {
-        "ROOT_MENU": RootMenu(current_view_name=view_name, init_menus=AdminLTEBaseView.menus()),
+        "ROOT_MENU": RootMenu(current_view_name=view_name, init_menus=AdminLTEBaseView.menus(user=request.user)),
         "current_view_name": view_name,
         "current_user": {
             "nickname": name,

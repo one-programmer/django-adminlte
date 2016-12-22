@@ -48,6 +48,8 @@ permission_group_menu = AdminMenu(name="Permissions", icon_classes='fa-lock')
 
 class PermissionsView(AdminLTEBaseView):
 
+    permission = 'admin'
+
     menu = AdminMenu('Permissions', parent_menu=permission_group_menu)
 
     def get(self, request, *args, **kwargs):
@@ -67,6 +69,8 @@ class PermissionsView(AdminLTEBaseView):
 
 
 class PermissionsCreateView(AdminLTEBaseView):
+
+    permission = 'admin'
 
     menu = AdminMenu('Add Permission', parent_menu=permission_group_menu)
 
@@ -88,6 +92,8 @@ class PermissionsCreateView(AdminLTEBaseView):
 
 class PermissionDeleteView(AdminLTEBaseView):
 
+    permission = 'admin'
+
     _regex_name = '^permissions/(?P<pk>[0-9]+)/delete$'
 
     def get(self, request, pk, *args, **kwargs):
@@ -98,6 +104,9 @@ class PermissionDeleteView(AdminLTEBaseView):
 
 
 class PermissionEditView(AdminLTEBaseView):
+
+    permission = 'admin'
+
     _regex_name = '^permissions/(?P<pk>[0-9]+)/edit$'
 
     template_name = 'adminlte/permissions/edit.html'
@@ -125,6 +134,8 @@ class PermissionEditView(AdminLTEBaseView):
 
 class GroupsView(AdminLTEBaseView):
 
+    permission = 'admin'
+
     menu = AdminMenu('Groups', parent_menu=permission_group_menu)
 
     def get(self, request, *args, **kwargs):
@@ -144,6 +155,8 @@ class GroupsView(AdminLTEBaseView):
 
 class GroupCreateView(AdminLTEBaseView):
 
+    permission = 'admin'
+
     menu = AdminMenu('Add Group', parent_menu=permission_group_menu)
 
     template_name = 'adminlte/groups/edit.html'
@@ -162,6 +175,8 @@ class GroupCreateView(AdminLTEBaseView):
 
 class GroupDeleteView(AdminLTEBaseView):
 
+    permission = 'admin'
+
     _regex_name = '^groups/(?P<pk>[0-9]+)/delete$'
 
     def get(self, request, pk, *args, **kwargs):
@@ -172,6 +187,9 @@ class GroupDeleteView(AdminLTEBaseView):
 
 
 class GroupEditView(AdminLTEBaseView):
+
+    permission = 'admin'
+
     _regex_name = '^groups/(?P<pk>[0-9]+)/edit$'
 
     template_name = 'adminlte/groups/edit.html'
@@ -210,6 +228,8 @@ class GroupEditView(AdminLTEBaseView):
 
 class UserGroupsView(AdminLTEBaseView):
 
+    permission = 'admin'
+
     menu = AdminMenu('User groups', parent_menu=permission_group_menu)
 
     def get(self, request, *args, **kwargs):
@@ -229,6 +249,9 @@ class UserGroupsView(AdminLTEBaseView):
 
 
 class UserGroupEditView(AdminLTEBaseView):
+
+    permission = 'admin'
+
     _regex_name = '^user_groups/(?P<pk>[0-9]+)/edit$'
 
     template_name = 'adminlte/user_groups/edit.html'
