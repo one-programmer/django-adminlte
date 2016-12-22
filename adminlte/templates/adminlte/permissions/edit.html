@@ -1,0 +1,31 @@
+{% extends 'adminlte/lib/base.html' %}
+
+{% block content %}
+    <div class="box">
+        <!-- form start -->
+        <form role="form" method="post">{% csrf_token %}
+            <div class="box-body">
+                {% if permission %}
+                    <div class="form-group">
+                        <label for="id">ID</label>
+                        <input id="id" class="form-control" value="{{ permission.id }}" disabled />
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                    <label for="codename">code</label>
+                    <input id="codename" name="codename" class="form-control" value="{{ permission.codename }}" />
+                </div>
+                <div class="form-group">
+                    <label for="name">name</label>
+                    <input id="name" name="name" class="form-control" value="{{ permission.name }}" />
+                </div>
+            </div>
+            <!-- /.box-body -->
+
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">提交</button>
+            </div>
+        </form>
+    </div>
+    <!-- /.box -->
+{% endblock %}

@@ -20,13 +20,15 @@
             <table class="table table-bordered">
                 <tr>
                     <th>#</th>
-                    <th>CODE</th>
+                    <th>code</th>
                     <th>name</th>
                     <th>-</th>
                 </tr>
                 {% for permission in pager.items %}
-                    <tr>
-                        <td>{{ forloop.counter }}</td>
+                    <tr data-id="{{ permission.id }}">
+                        <td>
+                            <a href="{% url 'adminlte.permission.edit' pk=permission.id %}">{{ forloop.counter }}</a>
+                        </td>
                         <td>{{ permission.codename }}</td>
                         <td>{{ permission.name }}</td>
                         <td>
