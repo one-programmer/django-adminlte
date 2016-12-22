@@ -1,7 +1,7 @@
 import math
 
 from django.conf import settings
-from django.contrib.auth.models import AnonymousUser
+from django.contrib.auth.models import AnonymousUser, User
 
 try:
     from urllib.parse import urlencode
@@ -10,6 +10,7 @@ except ImportError:
 
 from django.views.generic import View
 from django.shortcuts import redirect, render
+from django.http import HttpResponseForbidden
 from functools import wraps
 
 
@@ -39,6 +40,10 @@ class AdminLTEBaseView(View):
 
     login_required = True
 
+    menu = None
+
+    permission = None
+
     @staticmethod
     def _default_is_login_func(request):
         return not isinstance(request.user, AnonymousUser) and request.user.is_staff
@@ -53,6 +58,10 @@ class AdminLTEBaseView(View):
             login_view = getattr(settings, 'ADMINLTE_LOGIN_VIEW', 'adminlte.login')
             if not is_login(request):
                 return redirect(login_view)
+
+        if self.permission:
+            if not request.user.has_perm(self.permission):
+                return HttpResponseForbidden()
 
         if request.method.lower() in self.http_method_names:
             handler = getattr(self, request.method.lower(), self.http_method_not_allowed)
@@ -69,8 +78,9 @@ class AdminLTEBaseView(View):
         for clzss in cls.__subclasses__():
             if hasattr(clzss, 'menu'):
                 menu = clzss.menu
-                menu.view_name = clzss._view_name()
-                menus.append(menu)
+                if menu:
+                    menu.view_name = clzss._view_name()
+                    menus.append(menu)
 
         last_menus = []
         for menu in menus:
