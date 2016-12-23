@@ -27,12 +27,22 @@ INSTALLED_APPS = [
 url(r'^adminlte/', include('adminlte.urls')),
 ```
 
-3 Start the development server and visit http://127.0.0.1:8000/adminlte/
+3 add admin_config to `context_processors` or you can make your own config
+```python
+'OPTIONS': {
+    'context_processors': [
+        ...
+        'adminlte.utils.admin_config',
+    ],
+},
+```
+
+4 Start the development server and visit http://127.0.0.1:8000/adminlte/
    to create a poll (you'll need the Admin app enabled).
 
-4 Visit http://127.0.0.1:8000/adminlte/ to participate in the adminlte.
+5 Visit http://127.0.0.1:8000/adminlte/ to participate in the adminlte.
 
-5 Look the examples in the code to see how to start.
+6 Look the examples in the code to see how to start.
 
 
 ## Settings
