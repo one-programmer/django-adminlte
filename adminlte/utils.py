@@ -198,6 +198,8 @@ class Pager(object):
     def from_request(cls, query, request):
         page = int(request.GET.get('page', 1))
         size = int(request.GET.get('size', 20))
+        order_by = request.GET.get('order_by', '-id')
+
         params = {k: v[0] for k, v in dict(request.GET).items()}
 
         if 'page' in params:
@@ -207,6 +209,8 @@ class Pager(object):
             params.pop('size')
 
         params.update(size=size)
+
+        query = query.order_by(order_by)
         return Pager(query, page, size, params)
 
     @property

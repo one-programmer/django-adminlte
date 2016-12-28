@@ -1,6 +1,7 @@
 {% extends 'adminlte/lib/base.html' %}
 
 {% block content %}
+    <form>
     <div class="box">
         {% include 'adminlte/lib/_list_search_form.html' %}
 
@@ -29,4 +30,5 @@
             {% include 'adminlte/lib/_pagination.html' %}
         </div>
     </div>
+    </form>
 {% endblock %}

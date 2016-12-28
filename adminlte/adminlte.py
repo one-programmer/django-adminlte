@@ -64,7 +64,7 @@ class PermissionsView(AdminLTEBaseView):
         pager = Pager.from_request(query, request)
         return render(request, 'adminlte/permissions/index.html', context={
             "pager": pager,
-            "search": search
+            "search": search,
         })
 
 

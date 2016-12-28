@@ -1,34 +1,39 @@
 {% extends 'adminlte/lib/base.html' %}
+{% load adminlte_extras %}
 
 {% block content %}
-    <div class="box">
-        {% include 'adminlte/lib/_list_search_form.html' %}
+    <form id="listForm">
+        <div class="box">
+            {% include 'adminlte/lib/_list_search_form.html' %}
 
-        <div class="box-body">
-            <table class="table table-bordered">
-                <tr>
-                    <th>#</th>
-                    <th>code</th>
-                    <th>name</th>
-                    <th>-</th>
-                </tr>
-                {% for permission in pager.items %}
-                    <tr data-id="{{ permission.id }}">
-                        <td>
-                            <a href="{% url 'adminlte.permission.edit' pk=permission.id %}">{{ forloop.counter }}</a>
-                        </td>
-                        <td>{{ permission.codename }}</td>
-                        <td>{{ permission.name }}</td>
-                        <td>
-                            <a href="{% url 'adminlte.permission.delete' pk=permission.id %}">Delete</a>
-                        </td>
+            <div class="box-body">
+                <table class="table table-bordered dataTable">
+                    <thead>
+                    <tr>
+                        {% order_th name="#" field="id" %}
+                        {% order_th name="CODE" field="codename" %}
+                        <th>name</th>
+                        <th>-</th>
                     </tr>
-                {% endfor %}
-            </table>
+                    </thead>
+                    {% for permission in pager.items %}
+                        <tr data-id="{{ permission.id }}">
+                            <td>
+                                <a href="{% url 'adminlte.permission.edit' pk=permission.id %}">{{ permission.id }}</a>
+                            </td>
+                            <td>{{ permission.codename }}</td>
+                            <td>{{ permission.name }}</td>
+                            <td>
+                                <a href="{% url 'adminlte.permission.delete' pk=permission.id %}">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+                {% include 'adminlte/lib/_pagination.html' %}
+            </div>
         </div>
-        <!-- /.box-body -->
-        <div class="box-footer clearfix">
-            {% include 'adminlte/lib/_pagination.html' %}
-        </div>
-    </div>
+    </form>
 {% endblock %}
