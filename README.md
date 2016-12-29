@@ -55,6 +55,14 @@ adminlte login view. default is `adminlte.login`
 
 adminlte login validate method. if `required_login=False` will not validate login
 
+### ADMINLTE_SITE_NAME
+
+Site name. default is `AdminLTE`
+
+### ADMINLTE_SITE_URL
+
+footer url, default is `https://adminlte.speedx.com`
+
 
 ## Develop
 

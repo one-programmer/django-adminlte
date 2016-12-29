@@ -231,6 +231,8 @@ def admin_config(request):
     return {
         "ROOT_MENU": RootMenu(current_view_name=view_name, init_menus=AdminLTEBaseView.menus(user=request.user)),
         "current_view_name": view_name,
+        "site_name": getattr(settings, 'ADMINLTE_SITE_NAME', 'AdminLTE'),
+        "site_url": getattr(settings, 'ADMINLTE_SITE_URL', 'https://adminlte.speedx.com'),
         "current_user": {
             "nickname": name,
             "avatar_url": "/static/adminLTE/img/avatar5.png",
