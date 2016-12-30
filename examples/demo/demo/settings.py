@@ -24,7 +24,7 @@ SECRET_KEY = 'sgr&d!0fbhx^3e25q-e=m&u3ypb%dha+#hpr2!cpgp2pyb7s^j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', 'adminlte.speedx.com']
+ALLOWED_HOSTS = ['adminlte.speedx.com', 'localhost', '127.0.0.1', '[::1]']
 
 
 # Application definition
