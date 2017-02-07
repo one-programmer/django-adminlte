@@ -83,7 +83,7 @@ class AdminLTEBaseView(View):
                     if not user.is_superuser and not user.has_perm(clzss.permission):
                         continue
 
-                menu.view_name = clzss._view_name()
+                menu.view_name = clzss.view_name()
                 menus.append(menu)
 
         last_menus = []
@@ -117,7 +117,7 @@ class AdminLTEBaseView(View):
         return r'^%s$' % ''.join(char_list)
 
     @classmethod
-    def _view_name(cls):
+    def view_name(cls):
         char_list = []
 
         name = cls.__name__.replace('View', '')
@@ -139,7 +139,7 @@ class AdminLTEBaseView(View):
             regex_name = clzss._regex_name() if callable(clzss._regex_name) else clzss._regex_name
             if regex_name == r'^index$':
                 urlpatterns.append(url(r'^$', clzss.as_view()))
-            urlpatterns.append(url(regex_name, clzss.as_view(), name=clzss._view_name()))
+            urlpatterns.append(url(regex_name, clzss.as_view(), name=clzss.view_name()))
 
         return urlpatterns
 
