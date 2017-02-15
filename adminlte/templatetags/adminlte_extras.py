@@ -1,6 +1,6 @@
 from django import template
 from django.utils.safestring import mark_safe
-from django.urls import reverse
+from django.core.urlresolvers import reverse
 
 register = template.Library()
 
