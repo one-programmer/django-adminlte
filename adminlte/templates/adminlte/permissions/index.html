@@ -24,7 +24,7 @@
                             <td>{{ permission.codename }}</td>
                             <td>{{ permission.name }}</td>
                             <td>
-                                <a href="{% url 'adminlte.permission.delete' pk=permission.id %}">Delete</a>
+                                {% confirm_btn view_name="adminlte.permission.delete" pk=permission.id %}
                             </td>
                         </tr>
                     {% endfor %}

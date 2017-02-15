@@ -1,4 +1,5 @@
 {% extends 'adminlte/lib/base.html' %}
+{% load adminlte_extras %}
 
 {% block content %}
     <form>
@@ -19,7 +20,7 @@
                         </td>
                         <td>{{ group.name }}</td>
                         <td>
-                            <a href="{% url 'adminlte.group.delete' pk=group.id %}">Delete</a>
+                            {% confirm_btn view_name="adminlte.group.delete" pk=group.id %}
                         </td>
                     </tr>
                 {% endfor %}

@@ -45,6 +45,13 @@ url(r'^adminlte/', include('adminlte.urls')),
 6 Look the examples in the code to see how to start.
 
 
+# How to run example
+
+```
+PYTHONPATH=PYTHONPATH:. python examples/demo/manage.py runserver
+```
+
+
 ## Settings
 
 ### ADMINLTE_LOGIN_VIEW
