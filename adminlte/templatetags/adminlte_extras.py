@@ -23,16 +23,18 @@ def order_th(context, name, field):
 
 
 @register.simple_tag
-def confirm_btn(view_name, **kwargs):
+def confirm_btn(view_name, css_class='btn btn-danger', text="Delete", title="Are you sure?", **kwargs):
     """
     a button with confirm, you can just use this tag like {% url 'foo' %}
     e.g: {% confirm_btn view_name="foo" pk=permission.id %}
     :param view_name: view name
-    :param kwargs:
+    :param css_class: css class, default: btn btn-danger
+    :param text: button text
+    :param title: title of the confirm box
+    :param kwargs: kwargs for url reverse
     :return:
     """
-    css_class = kwargs.pop('css_class', 'btn btn-danger')
-    text = kwargs.pop('text', 'Delete')
     url = reverse(view_name, kwargs=kwargs)
 
-    return mark_safe("""<button class="%s confirm-to-href-btn" data-href="%s">%s</button>""" % (css_class, url, text))
+    return mark_safe("""<button class="%s confirm-to-href-btn" data-title="%s" data-href="%s">%s</button>""" % (
+        css_class, title, url, text))

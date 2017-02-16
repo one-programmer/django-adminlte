@@ -19,13 +19,10 @@ $(document).ready(function () {
 
     $(".confirm-to-href-btn").on('click', function () {
         var href = $(this).data('href');
+        var title = $(this).data('title') || "Are you sure?";
         console.log('start to confirm. href:', href);
-        if (!href) {
-            swal("To Coder!", "you need add data-href on your button!");
-            return false;
-        }
         swal({
-                title: "Are you sure?",
+                title: title,
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
