@@ -38,3 +38,13 @@ def confirm_btn(view_name, css_class='btn btn-danger', text="Delete", title="Are
 
     return mark_safe("""<button class="%s confirm-to-href-btn" data-title="%s" data-href="%s">%s</button>""" % (
         css_class, title, url, text))
+
+
+@register.inclusion_tag('adminlte/lib/_pagination.html', takes_context=True)
+def pagination(context):
+    return context
+
+
+@register.inclusion_tag('adminlte/lib/_list_search_form.html', takes_context=True)
+def search_form(context, placeholder='Search'):
+    return dict(value=context.get('search', ''), placeholder=placeholder)

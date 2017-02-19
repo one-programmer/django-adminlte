@@ -4,7 +4,7 @@
 {% block content %}
     <form id="listForm">
         <div class="box">
-            {% include 'adminlte/lib/_list_search_form.html' %}
+            {% search_form %}
 
             <div class="box-body">
                 <table class="table table-bordered dataTable">
@@ -32,7 +32,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
-                {% include 'adminlte/lib/_pagination.html' %}
+                {% pagination %}
             </div>
         </div>
     </form>

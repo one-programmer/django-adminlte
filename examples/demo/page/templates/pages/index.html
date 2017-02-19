@@ -1,4 +1,5 @@
 {% extends 'adminlte/lib/base.html' %}
+{% load adminlte_extras %}
 
 {% block content %}
     <div class="box">
@@ -20,7 +21,7 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer clearfix">
-            {% include 'adminlte/lib/_pagination.html' %}
+            {% pagination %}
         </div>
     </div>
 {% endblock %}
