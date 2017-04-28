@@ -28,6 +28,7 @@ url(r'^adminlte/', include('adminlte.urls')),
 ```
 
 3 add admin_config to `context_processors` or you can make your own config
+
 ```python
 'OPTIONS': {
     'context_processors': [

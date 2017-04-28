@@ -55,6 +55,8 @@ class ExamplePageEditView(AdminLTEBaseView):
 
     _regex_name = '^pages/(?P<page_id>[0-9]+)/edit$'
 
+    menu = AdminMenu(name="编辑页面", parent_menu=page_manager, display=False)
+
     def get(self, request, page_id, *args, **kwargs):
         page = Page.objects.get(pk=page_id)
         return render(request, self.template_name, context={

@@ -15,7 +15,8 @@ from django.http import HttpResponseForbidden
 
 class AdminMenu(object):
 
-    def __init__(self, name, icon_classes='fa-circle-o', description=None, parent_menu=None, sort=0):
+    def __init__(self, name, icon_classes='fa-circle-o', description=None, parent_menu=None, sort=0, display=True):
+        self.display = display
         self.description = description
         self.icon_classes = icon_classes
         self.view_name = None
