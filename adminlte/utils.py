@@ -199,7 +199,7 @@ class Pager(object):
     def from_request(cls, query, request):
         page = int(request.GET.get('page', 1))
         size = int(request.GET.get('size', 20))
-        order_by = request.GET.get('order_by', '-id')
+        order_by = request.GET.get('order_by', '-pk')
 
         params = {k: v[0] for k, v in dict(request.GET).items()}
 
