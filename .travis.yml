@@ -4,7 +4,6 @@ python:
 - '3.4'
 - '3.5'
 - '3.6'
-- nightly
 install:
 - pip install -q Django==$DJANGO_VERSION
 script: python runtests.py
@@ -14,6 +13,7 @@ env:
 - DJANGO_VERSION=1.10
 deploy:
   provider: pypi
+  distributions: "sdist bdist_wheel"
   user: bohanzhang
   password:
     secure: DuXrLbzXxD3JCvigU9Ot5UyRhmBG2XwbTr9FDGy9T5mj8ujB+d7UUMhs5siNQpudo6dA6UQo1pCs4q0tceHtWXrwtyCeoLEXsXCfCUOPlJv2JeXp1WV7jC18GzcJjhGyzTXAOVzudYwBoKHg1mVHHSlxpZGgE+HaXuGAkGoHKiwLRdJQobjRcvQaC0Ydyv8KjjVEK1GGXHHaN8whHDkZV61viTnu+d3ICve5Vd46wj8T4HFwYn/CWT4qiMGrFDf+vMoOSjahL5kRz+oYzMIY3Eae3Z6CSIS+KR9OwIJiKH6ro7KNlN0ggP0KyVUFtI7/RslUVwl8HGLJn4zQqWjQZ5oVbORJuxHbpdiJYG7QEdcy49RaPuhkATiYyxByUfVo/+VZIo03MtU9equ+NdWxK8OS4+Ympo+a5lr29alodrgpOZEt1P2LvclETyG6v9auwEqEvZ8Z4leoX/8iYfp6t8kYC5pgzlOdspMD2gDmTkAi9fbIZ9l9b7qA/LsIBDyIs3MkqlrL1WcNxmMZWbFpNUo5ZBw7T1x+wu9oaXbv36SZvFLeP0JZIHEVgJ4uCzW9s9hDn+/nQly/BKl8DWVCuLLqDpK0T/hk3M7P+NoSYB/aBLeDn/aWUrbLoEQJIsuVw/B1jt6AKJxWLFNb+tVZzPZbWb1pByI1POhlty8Dtas=
