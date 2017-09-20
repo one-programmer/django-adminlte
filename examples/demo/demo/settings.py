@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'adminlte.apps.AdminlteConfig',
     'page',
+    'adminlte_log'
 ]
 
 MIDDLEWARE = [

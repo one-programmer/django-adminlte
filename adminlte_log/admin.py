@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import AdminlteLog, AdminlteLogType
+
+
+admin.site.register(AdminlteLog)
+admin.site.register(AdminlteLogType)

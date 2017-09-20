@@ -1,0 +1,31 @@
+{% extends 'adminlte/lib/base.html' %}
+{% load adminlte_extras %}
+
+{% block content %}
+    <div class="box">
+        <div class="box-body">
+            <table class="table table-bordered">
+                <tr>
+                    <th>#</th>
+                    <th>类型</th>
+                    <th>级别</th>
+                    <th>描述</th>
+                    <th>操作员</th>
+                </tr>
+                {% for log in pager.items %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ log.type.name }}</td>
+                        <td>{{ log.level }}</td>
+                        <td>{{ log.sort_desc }}</td>
+                        <td>{% if log.user.fullname %}{{ log.user.fullname }}{% else %}{{ log.user.username }}{% endif %}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer clearfix">
+            {% pagination %}
+        </div>
+    </div>
+{% endblock %}
