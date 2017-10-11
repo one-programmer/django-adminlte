@@ -15,7 +15,9 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-
+            <li>
+                <a href="{% url 'adminlte.index' %}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+            </li>
             {% for menu in ROOT_MENU.menus %}
                 <li class="{% if menu == ROOT_MENU.current_menu or menu == ROOT_MENU.parent_menu %}
                     active{% else %}treeview{% endif %}">
