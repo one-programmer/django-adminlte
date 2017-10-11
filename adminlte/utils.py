@@ -142,14 +142,17 @@ class AdminLTEBaseView(View):
             urlpatterns.append(url(regex_name, clzss.as_view(), name=clzss.view_name()))
 
         from .adminlte import IndexView
-        dashboard_view_class_path = getattr(settings, 'ADMINLTE_DASHBOARD_VIEW_CLASS')
-        last_dot = dashboard_view_class_path.rfind('.')
-        module = dashboard_view_class_path[:last_dot]
-        class_name = dashboard_view_class_path[last_dot + 1:]
-        m = importlib.import_module(module)
-        dashboard_view_class = getattr(m, class_name)
-        if dashboard_view_class is None:
-            dashboard_view_class = clzss
+        try:
+            dashboard_view_class_path = getattr(settings, 'ADMINLTE_DASHBOARD_VIEW_CLASS')
+            last_dot = dashboard_view_class_path.rfind('.')
+            module = dashboard_view_class_path[:last_dot]
+            class_name = dashboard_view_class_path[last_dot + 1:]
+            m = importlib.import_module(module)
+            dashboard_view_class = getattr(m, class_name)
+            if dashboard_view_class is None:
+                dashboard_view_class = clzss
+        except AttributeError:
+            dashboard_view_class = clzss 
         urlpatterns.append(url(r'^$', dashboard_view_class.as_view(), name='adminlte.index'))
         return urlpatterns
 
